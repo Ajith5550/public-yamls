@@ -1,18 +1,21 @@
-name: Publish Nuget packages
-description: build and test template
-
-runs: 
-  using: composite
+name: 'Hello World'
+description: 'Greet someone'
+inputs:
+  who-to-greet:  # id of input
+    description: 'Who to greet'
+    required: true
+    default: 'World'
+outputs:
+  random-number:
+    description: "Random number"
+    value: ${{ steps.random-number-generator.outputs.random-id }}
+runs:
+  using: "composite"
   steps:
-  - uses: actions/checkout@v2
-  - name: Setup .NET
-    uses: actions/setup-dotnet@v1
-    shell: pwsh
-  - name: Restore dependencies
-    run: |
-        dotnet restore --configfile 'nuget.config'
-    shell: pwsh
-  - name: Test
-    run: dotnet test --collect='XPlat Code Coverage' --verbosity normal
-    shell: pwsh
-        
+    - run: echo Hello ${{ inputs.who-to-greet }}.
+      shell: bash
+    - id: random-number-generator
+      run: echo "::set-output name=random-id::$(echo $RANDOM)"
+      shell: bash
+    - run: ${{ github.action_path }}/goodbye.sh
+      shell: bash
