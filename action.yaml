@@ -6,9 +6,9 @@ runs:
   - uses: actions/checkout@v2
   - name: Setup .NET
     uses: actions/setup-dotnet@v1
-    shell: pwsh
+    shell: bash
   - name: Restore dependencies
     run: |
         dotnet restore --configfile 'nuget.config'
-    shell: pwsh
+    shell: bash
    
