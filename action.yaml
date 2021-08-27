@@ -9,5 +9,4 @@ runs:
   - name: Restore dependencies
     run: |
         dotnet restore --configfile 'nuget.config'
-
-   
+    shell: pwsh
