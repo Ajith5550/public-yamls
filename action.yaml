@@ -3,6 +3,12 @@ description: 'Greet someone'
 runs:
   using: "composite"
   steps:
-    - run: echo Hello.
-      shell: bash
+  - uses: actions/checkout@v2
+  - name: Setup .NET
+    uses: actions/setup-dotnet@v1
+    shell: pwsh
+  - name: Restore dependencies
+    run: |
+        dotnet restore --configfile 'nuget.config'
+    shell: pwsh
    
